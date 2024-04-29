@@ -7,7 +7,7 @@ const port = process.env.PORT || 5000;
 
 //middleware
 app.use(cors());
-app.use(express());
+app.use(express.json());
 
 
 //WeEMA6Vcvh1Hovf2
@@ -28,9 +28,14 @@ async function run() {
         // Connect the client to the server	(optional starting in v4.7)
         await client.connect();
 
+        const database = client.db("tripsterDB")
+        const touristSpotsCollection = database.collection("touristSpots")
+
         app.post('/add-spot', async (req, res) => {
             const newSpot = req.body
             console.log(newSpot)
+            const result = await touristSpotsCollection.insertOne(newSpot)
+            res.send(result)
         })
 
         // Send a ping to confirm a successful connection
