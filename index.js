@@ -59,6 +59,13 @@ async function run() {
             res.send(result)
         })
 
+        app.get('/view-details/:id', async (req, res) => {
+            const id = req.params.id
+            const query = { _id: new ObjectId(id) }
+            const result = await touristSpotsCollection.findOne(query)
+            res.send(result)
+        })
+
         app.put('/update-spot/:id', async (req, res) => {
             const id = req.params.id
             const filter = { _id: new ObjectId(id) }
