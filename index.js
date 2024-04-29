@@ -66,6 +66,14 @@ async function run() {
             res.send(result)
         })
 
+        app.get('/:countryName', async (req, res) => {
+            const countryName = req.params.countryName
+            const query = { country_name: countryName }
+            const cursor = touristSpotsCollection.find(query)
+            const result = await cursor.toArray()
+            res.send(result)
+        })
+
         app.put('/update-spot/:id', async (req, res) => {
             const id = req.params.id
             const filter = { _id: new ObjectId(id) }
