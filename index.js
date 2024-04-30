@@ -74,6 +74,10 @@ async function run() {
             res.send(result)
         })
 
+        app.delete('/my-lists/:id', async (req, res) => {
+            const id = req.params.id
+        })
+
         app.put('/update-spot/:id', async (req, res) => {
             const id = req.params.id
             const filter = { _id: new ObjectId(id) }
